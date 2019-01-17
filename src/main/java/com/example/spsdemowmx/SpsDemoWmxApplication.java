@@ -26,6 +26,4 @@ class HelloController{
     public String hello(){
         return "Hello, Mengxuan Wu!";
     }
-
-
 }
