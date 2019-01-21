@@ -33,4 +33,5 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",inverseJoinColumns = @JoinColumn(name = "role_code"))
     Set<Role> roles;
+
 }

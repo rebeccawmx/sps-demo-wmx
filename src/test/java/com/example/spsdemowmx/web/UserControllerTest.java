@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -22,6 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserControllerTest {
+    /*
+    * 注入测试对象
+    */
     @Autowired
     WebApplicationContext context;
     @Autowired UserController userController;
@@ -29,21 +34,34 @@ public class UserControllerTest {
 
     private MockMvc mvc;
 
+    /*
+    * 初始化，模拟加载 mvc 的 web 测试环境
+    * 指定WebApplicationContext，将会从该上下文获取相应的控制器并得到相应的MockMvc
+    */
     @Before
     public void setUp() {
         mvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
 
+    /*
+    * 测试 Service层 indAll ,查找所有用户
+    */
     @Test
     public void findAll(){
         assertEquals(3, userRepository.findAll().size());
     }
 
+    /*
+    * 测试 Web 层 findAll ,查找所有用户
+    */
     @Test
     public void mockFindAll() throws Exception{
         mvc.perform(get("/api/users")).andExpect(status().isOk()).andDo(print());
     }
 
+    /*
+    * 测试 web 层插入数据，测试结束后删除
+    */
     @Test
     public void create() throws Exception {
         mvc.perform(post("/api/users")
