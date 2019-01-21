@@ -28,18 +28,3 @@ public class SpsDemoWmxApplication {
     }
 
 }
-
-/**
-@RestController
-class HelloController{
-    @GetMapping("/")
-    @ResponseBody
-    public String hello(){
-        return "Hello, Mengxuan Wu!";
-    }
-}
-*/
-
-
-
-
