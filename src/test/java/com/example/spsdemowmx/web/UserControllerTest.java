@@ -44,4 +44,16 @@ public class UserControllerTest {
         mvc.perform(get("/api/users")).andExpect(status().isOk()).andDo(print());
     }
 
+    @Test
+    public void create() throws Exception {
+        mvc.perform(post("/api/users")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content("{\"username\":\"temp\", \"password\":\"777777\"}"))
+                .andExpect(status().isOk()).andDo(print());
+
+        assertEquals(4, userController.findAll().size());
+
+        userController.delete(userRepository.findOneByUsername("temp").getId());
+    }
+
 }
