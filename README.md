@@ -135,8 +135,6 @@ sequenceDiagram
 
 参考：![image](https://static.oschina.net/uploads/img/201611/20163438_5JhF.png)
 
-
-
 #### 访问 h2-console
 
 h2 的内存数据库，在生产环境下不开放
@@ -225,7 +223,7 @@ public class UserController {
 
 #### 数据访问对象 Repository（数据层）
 
-通过接口实现对数据层的访问：创建 DAO( *Data Access Object*  )：UserRepository
+通过接口实现对数据层的访问：创建 DAO ( *Data Access Object*  )：UserRepository
 
 ```java
 //通过接口实现
@@ -344,7 +342,7 @@ public class UserResource {
 
 ## 遇到的问题
 
-- git push 的时候遇到的错误：
+- 1. git push 的时候遇到的错误：
 
 ```bash
 C:\Users\wumengxuan\Desktop\我的文档\sps-demo-wmx>git push -u origin master
@@ -364,7 +362,7 @@ git remote set-url origin http://git.wilmar.cn/wumengxuan/sps-demon-wmx.git
 git push origin master
 ```
 
-- 设置好实体发现：
+- 2. 设置好实体发现：
 
 ```java
 Caused by: org.hibernate.AnnotationException: No identifier specified for entity: com.example.domain.p.User
@@ -378,4 +376,6 @@ Caused by: org.hibernate.AnnotationException: No identifier specified for entity
 解决方法：`import javax.persistence.Id` 而我却导入了 `org.springframework.data.annotation.Id` 
 
 虽然 IDE 语法检测不会报错，但是我们要用到的是 `persistence.Id`。
+
+
 

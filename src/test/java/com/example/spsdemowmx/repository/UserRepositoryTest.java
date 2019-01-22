@@ -15,16 +15,19 @@ public class UserRepositoryTest {
     UserRepository userRepository;
 
     /*
-    * 测试 findAll
+    * 测试 findAll 是否返回5个User
     */
     @Test
     public void testFindAll() {
-        assertEquals(3, userRepository.findAll().size());
+        assertEquals(5, userRepository.findAll().size());
     }
 
+    /*
+    * 测试 findById 查找 Id = 4 的 User 是否匹配
+    * */
     @Test
     public void testFindById() {
-        assertEquals("wumengxuan", userRepository.findById(1L).get().getUsername());
+        assertEquals("wumengxuan", userRepository.findById(4L).get().getUsername());
     }
 
 }

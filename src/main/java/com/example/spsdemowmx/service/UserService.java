@@ -27,13 +27,13 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<User> findAll() {
-        log.debug("UserService.findAll");
+        log.info("UserService.findAll");
         return userRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Optional<User> findOne(Long id) {
-        log.debug("UserService.findOne, id : {}", id);
+        log.info("UserService.findOne, id : {}", id);
         return userRepository.findById(id);
     }
 

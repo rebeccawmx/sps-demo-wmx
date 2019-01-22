@@ -44,14 +44,6 @@ public class UserControllerTest {
     }
 
     /*
-    * 测试 Service层 indAll ,查找所有用户
-    */
-    @Test
-    public void findAll(){
-        assertEquals(3, userRepository.findAll().size());
-    }
-
-    /*
     * 测试 Web 层 findAll ,查找所有用户
     */
     @Test
@@ -69,7 +61,7 @@ public class UserControllerTest {
                 .content("{\"username\":\"temp\", \"password\":\"777777\"}"))
                 .andExpect(status().isOk()).andDo(print());
 
-        assertEquals(4, userController.findAll().size());
+        assertEquals(6, userController.findAll().size());
 
         userController.delete(userRepository.findOneByUsername("temp").getId());
     }

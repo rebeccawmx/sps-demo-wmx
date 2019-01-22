@@ -16,15 +16,15 @@ public class UserServiceTest {
     @Autowired UserService userService;
 
     /*
-    * 测试 saveOrUpdate
+    * 测试 saveOrUpdate 是否能插入数据
     */
     @Test
     public void saveOrUpdate(){
 
-        User tempUser = new User(null,"testUsers","000000");
+        User tempUser = new User(null,"testUsers","000000",null,null);
         userService.saveOrUpdate(tempUser);
-        assertEquals(3,userService.findAll().size());
+        assertEquals(6,userService.findAll().size());
 
-        userService.delete(tempUser.getID());
+        userService.delete(tempUser.getId());
     }
 }
