@@ -1,12 +1,13 @@
 package com.example.spsdemowmx.web;
 
 import com.example.spsdemowmx.domian.User;
-import com.example.spsdemowmx.repository.UserRepository;
 import com.example.spsdemowmx.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,5 +55,12 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public void delete(@PathVariable("id") Long id) {
         userService.delete(id);
+    }
+
+    @ApiOperation(value = "用户列表信息（分页）", notes = "")
+    @ApiImplicitParam(name = "pageable", value = "", required = true, dataType = "Long")
+    @GetMapping("/users/pageable")
+    public Page<User> findUsers(@RequestParam(value = "keyword", required = false) String keyword, @PageableDefault Pageable pageable) {
+        return userService.queryUsers(keyword, pageable);
     }
 }

@@ -340,6 +340,46 @@ public class UserResource {
 }
 ```
 
+## 复杂查询
+
+最后介绍在特别复杂的查询中，通常是多种条件或者混合条件检索，拼接 SQL、拼接翻页器等信息：
+
+```java
+// Repository
+@Query("select u from User u where 1=1 and (?1 is null or u.username like concat('%',?1,'%')) and (?1 is null or u.email like concat('%',?1,'%'))")
+Page<User> queryByKeyword(@Param("keyword") String keyword, Pageable pageable);
+
+// Controller
+@GetMapping("/users")
+public Page<User> findUsers(@RequestParam(value = "keyword", required = false) String keyword, @PageableDefault Pageable pageable) {
+    return userService.queryUsers(keyword, pageable);
+}
+   
+// Mock Test 
+@Test
+public void findUsers() {
+    List<User> users;
+    users = userController.findUsers(null, null).getContent();
+    assertEquals(3, users.size());
+
+    users = userController.findUsers("yinguowei", null).getContent();
+    assertEquals(1, users.size());
+
+    users = userController.findUsers("jon", null).getContent();
+    assertEquals(0, users.size());
+
+    users = userController.findUsers(null, PageRequest.of(0, 1)).getContent();
+    assertEquals(1, users.size());
+}
+```
+
+bash 测试脚本（注意url里面带特殊字符要加上双引号）
+
+```bash
+curl "http://localhost:8080/api/users?page=0&size=1" | jq
+curl "http://localhost:8080/api/users?keyword=chen&page=0&size=10" | jq
+```
+
 ## 遇到的问题
 
 - 1. git push 的时候遇到的错误：

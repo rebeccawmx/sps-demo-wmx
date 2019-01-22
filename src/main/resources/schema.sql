@@ -42,6 +42,12 @@ INSERT INTO `USER` (id, username, password, org_id) VALUES (2, 'chengyu', '22222
 INSERT INTO `USER` (id, username, password, org_id) VALUES (3, 'lichenjing', '333333', 3);
 INSERT INTO `USER` (id, username, password, org_id) VALUES (4, 'wumengxuan', '444444', 1);
 INSERT INTO `USER` (id, username, password, org_id) VALUES (5, 'liurui', '55555', 4);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (6, 'chenjing', '111111', 1);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (7, 'xiongkun', '222222', 2);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (8, 'xingxiaoxiao', '333333', 3);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (9, 'xuqiuping', '444444', 1);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (10, 'yeyeyeye', '55555', 4);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (11, 'zhanghongbing', 'sixsixsix', 4);
 
 INSERT INTO `ROLE` (code) VALUES ('ADMIN');
 INSERT INTO `ROLE` (code) VALUES ('USER');
@@ -55,3 +61,9 @@ INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (3, 'USER');
 INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (4, 'ADMIN');
 INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (4, 'USER');
 INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (5, 'GUEST');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (6, 'ADMIN');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (7, 'USER');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (8, 'USER');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (9, 'ADMIN');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (10, 'USER');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (11, 'ADMIN');

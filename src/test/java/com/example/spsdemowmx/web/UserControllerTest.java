@@ -1,12 +1,14 @@
 package com.example.spsdemowmx.web;
 
 
+import com.example.spsdemowmx.domian.User;
 import com.example.spsdemowmx.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -14,6 +16,8 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -64,6 +68,25 @@ public class UserControllerTest {
         assertEquals(6, userController.findAll().size());
 
         userController.delete(userRepository.findOneByUsername("temp").getId());
+    }
+
+    /*
+     * 分页测试
+     * */
+    @Test
+    public void findUsers() {
+        List<User> users;
+        users = userController.findUsers(null, null).getContent();
+        assertEquals(11, users.size());
+
+        users = userController.findUsers("yinguowei", null).getContent();
+        assertEquals(1, users.size());
+
+        users = userController.findUsers("jon", null).getContent();
+        assertEquals(0, users.size());
+
+        users = userController.findUsers(null, PageRequest.of(0, 1)).getContent();
+        assertEquals(1, users.size());
     }
 
 }

@@ -4,6 +4,10 @@ package com.example.spsdemowmx.service;
 import com.example.spsdemowmx.domian.User;
 import com.example.spsdemowmx.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,5 +44,14 @@ public class UserService {
     public void delete(Long id) {
         log.debug("UserService.delete, id : {}", id);
         userRepository.deleteById(id);
+    }
+
+    /*
+    * 添加分页
+    * */
+    @Transactional(readOnly = true)
+    public Page<User> queryUsers(String keyword, Pageable pageable) {
+        System.out.println("UserService.queryUsers");
+        return userRepository.queryByKeyword(keyword, pageable);
     }
 }
