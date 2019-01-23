@@ -59,7 +59,7 @@ public class UserController {
 
     @ApiOperation(value = "用户列表信息（分页）", notes = "")
     @ApiImplicitParam(name = "pageable", value = "", required = true, dataType = "Long")
-    @GetMapping("/users/pageable")
+    @GetMapping("/users/pages")
     public Page<User> findUsers(@RequestParam(value = "keyword", required = false) String keyword, @PageableDefault Pageable pageable) {
         return userService.queryUsers(keyword, pageable);
     }

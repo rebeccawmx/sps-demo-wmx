@@ -65,28 +65,39 @@ public class UserControllerTest {
                 .content("{\"username\":\"temp\", \"password\":\"777777\"}"))
                 .andExpect(status().isOk()).andDo(print());
 
-        assertEquals(6, userController.findAll().size());
+        assertEquals(11, userController.findAll().size());
 
         userController.delete(userRepository.findOneByUsername("temp").getId());
     }
 
-    /*
-     * 分页测试
-     * */
+    /**
+     * 测试分页
+     */
     @Test
     public void findUsers() {
         List<User> users;
         users = userController.findUsers(null, null).getContent();
         assertEquals(11, users.size());
 
-        users = userController.findUsers("yinguowei", null).getContent();
+        users = userController.findUsers("wumengxuan", null).getContent();
         assertEquals(1, users.size());
 
-        users = userController.findUsers("jon", null).getContent();
+        users = userController.findUsers("lgh", null).getContent();
         assertEquals(0, users.size());
 
-        users = userController.findUsers(null, PageRequest.of(0, 1)).getContent();
+        users = userController.findUsers(null, PageRequest.of(3, 10)).getContent();
+        assertEquals(0, users.size());
+
+        users = userController.findUsers(null, PageRequest.of(2, 10)).getContent();
+        assertEquals(0, users.size());
+
+        users = userController.findUsers(null, PageRequest.of(1, 10)).getContent();
         assertEquals(1, users.size());
+
+        users = userController.findUsers(null, PageRequest.of(0, 10)).getContent();
+        assertEquals(10, users.size());
+
+
     }
 
 }
