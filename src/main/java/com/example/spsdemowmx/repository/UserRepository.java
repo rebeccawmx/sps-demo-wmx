@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findOneByUsername(String username);
+    User findOneByUsernameAndPassword(String username , String password);
 
     /*
      * 添加分页

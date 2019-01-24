@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,18 +24,21 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "用户列表信息", notes = "")
-    @GetMapping("/users")
+    @GetMapping("/allusers")
     public List<User> findAll() {
         return userService.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "获取用户详细信息", notes = "通过 url 的 id 来获取用户的详细信息")
     @GetMapping("/users/{id}")
     public User findById(@PathVariable("id") Long id) {
         return userService.findOne(id).orElse(null);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "创建用户", notes = "通过 User 对象创建用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体 user", required = true, dataType = "User")
     @PostMapping("/users")
@@ -43,6 +47,7 @@ public class UserController {
         return user;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "更新用户", notes = "通过 User 对象更新用户")
     @ApiImplicitParam(name = "user", value = "用户 ID", required = true, dataType = "User")
     @PutMapping("/users")
@@ -50,6 +55,7 @@ public class UserController {
         userService.saveOrUpdate(user);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "删除用户", notes = "通过 ID 删除用户")
     @ApiImplicitParam(name = "user", value = "用户 ID", required = true, dataType = "Long")
     @DeleteMapping("/users/{id}")
@@ -57,10 +63,19 @@ public class UserController {
         userService.delete(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "用户列表信息（分页）", notes = "")
     @ApiImplicitParam(name = "pageable", value = "", required = true, dataType = "Long")
     @GetMapping("/users/pages")
     public Page<User> findUsers(@RequestParam(value = "keyword", required = false) String keyword, @PageableDefault Pageable pageable) {
         return userService.queryUsers(keyword, pageable);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @ApiOperation(value = "用户登陆", notes = "")
+    @ApiImplicitParam(name = "user", value = "", required = true, dataType = "Long")
+    @GetMapping("/login")
+    public User login(@RequestBody User user) {
+        return userService.loginUsers(user.getUsername(), user.getPassword());
     }
 }

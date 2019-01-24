@@ -36,11 +36,14 @@ INSERT INTO `ORGANIZATION` (id, name) VALUES (2, 'Amazon');
 INSERT INTO `ORGANIZATION` (id, name) VALUES (3, 'Smartisan');
 INSERT INTO `ORGANIZATION` (id, name) VALUES (4, '泛微');
 
+-- 111111 -> $2a$10$FVHd3izIQ2GLmgTJ2SuyfO1P8NW8XY5ORNNzqlHNplg8sSn1AU8eu
+-- 222222 -> $2a$10$cJBr02/aW1zAAfeokEk2oergHciIyx09ZF0dk5NE7J3Qtg4qsVHJS
+-- 333333 -> $2a$10$0c8jTXaLV5HTBjabOjTMQOXuVOdsKL.WE2QL2kqs0R6xewygyobpG
 
-INSERT INTO `USER` (id, username, password, org_id) VALUES (1, 'yinguowei', '111111', 1);
-INSERT INTO `USER` (id, username, password, org_id) VALUES (2, 'chengyu', '222222', 2);
-INSERT INTO `USER` (id, username, password, org_id) VALUES (3, 'lichenjing', '333333', 3);
-INSERT INTO `USER` (id, username, password, org_id) VALUES (4, 'wumengxuan', '444444', 1);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (1, 'yinguowei', '$2a$10$FVHd3izIQ2GLmgTJ2SuyfO1P8NW8XY5ORNNzqlHNplg8sSn1AU8eu', 1);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (2, 'chengyu', '$2a$10$cJBr02/aW1zAAfeokEk2oergHciIyx09ZF0dk5NE7J3Qtg4qsVHJS', 2);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (3, 'lichenjing', '$2a$10$0c8jTXaLV5HTBjabOjTMQOXuVOdsKL.WE2QL2kqs0R6xewygyobpG', 3);
+INSERT INTO `USER` (id, username, password, org_id) VALUES (4, 'wumengxuan', '$2a$10$FVHd3izIQ2GLmgTJ2SuyfO1P8NW8XY5ORNNzqlHNplg8sSn1AU8eu', 1);
 INSERT INTO `USER` (id, username, password, org_id) VALUES (5, 'liurui', '55555', 4);
 INSERT INTO `USER` (id, username, password, org_id) VALUES (6, 'chenjing', '111111', 1);
 INSERT INTO `USER` (id, username, password, org_id) VALUES (7, 'xiongkun', '222222', 2);
@@ -61,9 +64,9 @@ INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (3, 'USER');
 INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (4, 'ADMIN');
 INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (4, 'USER');
 INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (5, 'GUEST');
-INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (6, 'ADMIN');
-INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (7, 'USER');
-INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (8, 'USER');
-INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (9, 'ADMIN');
-INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (10, 'USER');
-INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (11, 'ADMIN');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (6, 'GUEST');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (7, 'GUEST');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (8, 'GUEST');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (9, 'GUEST');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (10, 'GUEST');
+INSERT INTO `USER_ROLE` (user_id, role_code) VALUES (11, 'GUEST');
