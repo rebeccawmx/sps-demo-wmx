@@ -31,11 +31,12 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // 创建用户或更新用户
     public User saveOrUpdate(User user) {
         log.debug("UserService.saveOrUpdate, user : {}", user);
-//        if (user.getPassword() != null) {
-//            user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        }
+        if (user.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 

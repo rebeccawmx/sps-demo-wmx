@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -59,15 +60,16 @@ public class UserControllerTest {
     * 测试 web 层插入数据，测试结束后删除
     */
     @Test
+    @WithMockUser(roles = "ADMIN")
     public void create() throws Exception {
         mvc.perform(post("/api/users")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content("{\"username\":\"temp\", \"password\":\"777777\"}"))
+                .content("{\"username\":\"temp\", \"password\":\"111111\"}"))
                 .andExpect(status().isOk()).andDo(print());
 
-        assertEquals(11, userController.findAll().size());
+        assertEquals(12, userController.findAll().size());
 
-        userController.delete(userRepository.findOneByUsername("temp").getId());
+        //userController.delete(userRepository.findOneByUsername("temp").getId());
     }
 
     /**
@@ -96,7 +98,6 @@ public class UserControllerTest {
 
         users = userController.findUsers(null, PageRequest.of(0, 10)).getContent();
         assertEquals(10, users.size());
-
 
     }
 

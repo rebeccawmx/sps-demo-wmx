@@ -26,7 +26,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "用户列表信息", notes = "")
-    @GetMapping("/allusers")
+    @GetMapping("/users")
     public List<User> findAll() {
         return userService.findAll();
     }
