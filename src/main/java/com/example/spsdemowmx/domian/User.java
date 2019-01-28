@@ -23,7 +23,6 @@ public class User {
 
     String password;
 
-
     // 增加关联关系：用户--组织
     @ManyToOne(fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)

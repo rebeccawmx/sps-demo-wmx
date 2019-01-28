@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @EnableWebSecurity
-// 开启权限设置
+// 开启权限设置DefaultPasswordEncoder
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

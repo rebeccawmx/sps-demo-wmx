@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.jmx.access.InvalidInvocationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,18 @@ public class UserService {
         }
         return userRepository.save(user);
     }
+
+    // 修改密码
+    @Transactional(readOnly = true)
+    public void changePassword(User user , String currentPassword , String newPassword){
+
+        if(!passwordEncoder.matches(currentPassword,user.getPassword())){
+            // NOT TODO
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.updatePassword(user.getId(),user.getPassword());
+    }
+
 
     @Transactional(readOnly = true)
     public List<User> findAll() {

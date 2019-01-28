@@ -2,9 +2,8 @@ package com.example.spsdemowmx.web;
 
 import com.example.spsdemowmx.domian.User;
 import com.example.spsdemowmx.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import com.example.spsdemowmx.service.dto.PasswordChangeDTO;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -55,6 +54,22 @@ public class UserController {
         userService.saveOrUpdate(user);
     }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @ApiOperation(value = "更新用户密码", notes = "比对密码进行更改")
+    @ApiImplicitParam(name = "user", value = "用户 ID", required = true, dataType = "User")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "更新成功", response = User.class),
+            @ApiResponse(code = 408, message = "密码不合规"),
+            @ApiResponse(code = 404, message = "没有找到用户id或角色id")
+    })
+    @PutMapping("/users/{userID}/password")
+    public void changePassword(@PathVariable("userID") Long id, @RequestBody PasswordChangeDTO passwordChangeDTO){
+        userService.findOne(id).ifPresent(
+                user -> userService.changePassword(user, passwordChangeDTO.getCurrentPassword(),passwordChangeDTO.getNewPassword())
+        );
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "删除用户", notes = "通过 ID 删除用户")
     @ApiImplicitParam(name = "user", value = "用户 ID", required = true, dataType = "Long")
@@ -78,4 +93,5 @@ public class UserController {
     public User login(@RequestBody User user) {
         return userService.loginUsers(user.getUsername(), user.getPassword());
     }
+
 }
