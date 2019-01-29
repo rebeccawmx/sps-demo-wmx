@@ -39,7 +39,7 @@ public class DomainUserDetailsService implements UserDetailsService {
 
         User user = userRepository.findOneByUsername(username);
         if ( user == null ){
-            throw new UsernameNotFoundException("改用户不存在！");
+            throw new UsernameNotFoundException("该用户不存在！");
         }
 
         List<GrantedAuthority> grantedAuthorities = user.getRoles().stream()

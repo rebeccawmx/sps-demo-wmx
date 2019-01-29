@@ -23,7 +23,7 @@ public class UserServiceTest {
 
         User tempUser = new User(null,"testUsers","000000",null,null);
         userService.saveOrUpdate(tempUser);
-        assertEquals(6,userService.findAll().size());
+        assertEquals(12,userService.findAll().size());
 
         userService.delete(tempUser.getId());
     }

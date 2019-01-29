@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     /*
      * 添加分页
-     * */
+     **/
     @Query("select u from User u where 1=1 and (?1 is null or u.username like concat('%',?1,'%'))")
     Page<User> queryByKeyword(@Param("keyword") String Keyword, Pageable pageable);
 

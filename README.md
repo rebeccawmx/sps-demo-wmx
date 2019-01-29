@@ -1,4 +1,4 @@
-# sps 备品备件开发教程
+# sps 备品备件环境搭建
 
 author：wumengxuan
 
@@ -6,10 +6,10 @@ author：wumengxuan
 
 ### Spring Boot 启动原理
 
-程序的入口 `main` 启动的时候调用 `SpsDemoWmxApplication`
+`@SpringBootApplication` 是一个复合注解，标注当前配置类，继承自 `@Configuration` ，会将当前类内声明的一个或多个以 `@Bean` 注解标记的方法的实例纳入到 `srping` 容器中，并且实例名就是方法名。  
 
 ```java
-@SpringBootApplication
+@SpringBootApplication         // mainClass() 的入口
 public class SpsDemoWmxApplication {
 
     public static void main(String[] args) {
@@ -70,18 +70,18 @@ sps-demo
     │   │   └── cn
     │   │       └── wilmar
     │   │           └── spsdemo
-    │   │               ├── domain                    //实体（Entity）与数据访问层（Repository）
+    │   │               ├── domain                    //实体（Entity）
     │   │               │   ├── Organization.java
     │   │               │   ├── Role.java
     │   │               │   └── User.java
-    │   │               ├── repository                          // 页面访问控制
+    │   │               ├── repository                          // DAO层（即仓库，数据访问层）
     │   │               │   ├── OrganizationRepository.java
     │   │               │   ├── RoleRepository.java
     │   │               │   └── UserRepository.java
-    │   │               ├── service                             // 业务类代码
+    │   │               ├── service                             // 服务层，业务类代码
     │   │               │   └── UserService.java         
     │   │               ├── SpsDemoApplication.java             // main入口，作为框架配置
-    │   │               └── web
+    │   │               └── web								 // 展示层
     │   │                   ├── OrganizationController.java
     │   │                   ├── RoleController.java
     │   │                   └── UserController.java
@@ -106,7 +106,7 @@ sps-demo
 
 #### Hello,world
 
-创建Hello，mengxuanwu 验证框架是否可以跑起来：
+创建一个最简单的 Hello,Mengxuan Wu! 验证框架是否可以跑起来：
 
 ```java
 @RestController         // 声明为 MVC 里的C Restful请求，返回是个text文本
@@ -119,7 +119,7 @@ class HelloController { // 普通类
 }
 ```
 
-访问 http://localhost:8080 出现 Hello, Mengxuan Wu 即可。
+访问 http://localhost:8080 出现 Hello, Mengxuan Wu! 即可。
 
 ❓什么浏览器会出现 Hello, Mengxuan Wu 这样的返回值？
 
@@ -417,5 +417,10 @@ Caused by: org.hibernate.AnnotationException: No identifier specified for entity
 
 虽然 IDE 语法检测不会报错，但是我们要用到的是 `persistence.Id`。
 
+## 附录：注解
 
+##### `@SpringBootApplication`
 
+- 是一个复合注解，标注当前配置类，继承自 `@Configuration` ，会将当前类内声明的一个或多个以 `@Bean` 注解标记的方法的实例纳入到 `srping` 容器中，并且实例名就是方法名。  
+
+   

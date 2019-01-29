@@ -46,7 +46,7 @@ public class UserService {
     public void changePassword(User user , String currentPassword , String newPassword){
 
         if(!passwordEncoder.matches(currentPassword,user.getPassword())){
-            // NOT TODO
+            // TODO
         }
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.updatePassword(user.getId(),user.getPassword());
@@ -80,9 +80,9 @@ public class UserService {
     }
 
     /**
-     * 查找用户名密码
+     * 登陆界面验证用户名密码
      */
-    public  User loginUsers(String username , String password){
+    public User loginUsers(String username , String password){
         return userRepository.findOneByUsernameAndPassword(username,password);
     }
 }

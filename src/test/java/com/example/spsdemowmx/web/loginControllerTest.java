@@ -51,7 +51,7 @@ public class loginControllerTest {
     }
 
     /**
-     * 测试密码不对是否能登陆成功
+     * 测试管理员密码错误登陆失败
      * @throws Exception
      */
     @Test
@@ -60,4 +60,15 @@ public class loginControllerTest {
         mockMvc.perform(login).andExpect(unauthenticated());
     }
 
+    /**
+     * 测试普通用户登陆
+     * @throws Exception
+     */
+    @Test
+    public void testLoginUser() throws Exception{
+        FormLoginRequestBuilder login = formLogin().user("chenyu").password("222222");
+        mockMvc.perform(login)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(authenticated());
+    }
 }

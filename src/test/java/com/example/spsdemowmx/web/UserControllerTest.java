@@ -88,7 +88,7 @@ public class UserControllerTest {
     public void findUsers() {
         List<User> users;
         users = userController.findUsers(null, null).getContent();
-        assertEquals(11, users.size());
+        assertEquals(12, users.size());
 
         users = userController.findUsers("wumengxuan", null).getContent();
         assertEquals(1, users.size());
